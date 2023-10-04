@@ -5,10 +5,14 @@ import com.project.bbibbi.domain.showroom.feedComment.dto.FeedCommentDto;
 import com.project.bbibbi.domain.showroom.feedComment.entity.FeedComment;
 import com.project.bbibbi.domain.showroom.feedComment.mapper.FeedCommentMapper;
 import com.project.bbibbi.domain.showroom.feedComment.service.FeedCommentService;
+import com.project.bbibbi.global.response.SingleResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -17,6 +21,7 @@ public class FeedCommentController {
 
     private final FeedCommentService feedCommentService;
     private final FeedCommentMapper feedCommentMapper;
+    private final static String FEED_COMMENT_DEFAULT_URL = "/feed/{feed-id}/feedReply/{feed-reply-id}/feedComment";
 
     @Autowired
     public FeedCommentController(FeedCommentService feedCommentService,
@@ -26,7 +31,7 @@ public class FeedCommentController {
     }
 
     @PostMapping
-    public ResponseEntity<FeedCommentDto> createComment(
+    public ResponseEntity createComment(
             @PathVariable("feed-id" ) Long feedId,
             @PathVariable("feed-reply-id" ) Long feedReplyId,
             @RequestBody FeedCommentDto dto) {
@@ -41,23 +46,27 @@ public class FeedCommentController {
 
         FeedCommentDto responseDto = feedCommentMapper.feedCommentToFeedCommentDto(savedComment);
 
-        return ResponseEntity.ok(responseDto);
+        URI location = UriComponentsBuilder.newInstance().path(
+                FEED_COMMENT_DEFAULT_URL+"/{feed-comment-id}"
+        ).buildAndExpand(feedId,feedReplyId,savedComment.getFeedCommentId()).toUri();
+
+        return ResponseEntity.created(location).body(new SingleResponseDto<>(responseDto));
 
     }
 
     @GetMapping("/{commentId}")
-    public ResponseEntity<FeedCommentDto> findComment(@PathVariable Long commentId) {
+    public ResponseEntity findComment(@PathVariable Long commentId) {
         Optional<FeedComment> optionalFeedComment = feedCommentService.findById(commentId);
         if (optionalFeedComment.isPresent()) {
             FeedComment feedComment = optionalFeedComment.get();
-            return ResponseEntity.ok(feedCommentMapper.feedCommentToFeedCommentDto(feedComment));
+            return new ResponseEntity(new SingleResponseDto<>(feedComment), HttpStatus.OK);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PatchMapping("/{commentId}")
-    public ResponseEntity<FeedCommentDto> updateComment(
+    public ResponseEntity updateComment(
             @PathVariable Long commentId,
             @RequestBody FeedCommentDto dto) {
 
@@ -65,14 +74,16 @@ public class FeedCommentController {
 
             FeedCommentDto feedCommentDto = feedCommentMapper.feedCommentToFeedCommentDto(updateFeedComment);
 
-            return ResponseEntity.ok(feedCommentDto);
+            return new ResponseEntity(new SingleResponseDto<>(feedCommentDto), HttpStatus.OK);
 
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<String> deleteComment(@PathVariable Long commentId) {
+    public ResponseEntity deleteComment(@PathVariable Long commentId) {
+
         feedCommentService.deleteComment(commentId);
-        return ResponseEntity.ok("답글이 성공적으로 삭제되었습니다.");
+
+        return new ResponseEntity<>("댓글이 성공적으로 삭제되었습니다.", HttpStatus.NO_CONTENT);
     }
 
 }

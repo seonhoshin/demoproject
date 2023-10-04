@@ -126,11 +126,11 @@ public class FeedReplyControllerTest {
                                 .content(content)
                 );
 
-        actions.andExpect(status().isOk())
-                .andExpect(jsonPath("$.feedReplyId").value(feedReply.getFeedReplyId()))
-                .andExpect(jsonPath("$.feedId").value(feedReply.getFeed().getFeedId()))
-                .andExpect(jsonPath("$.memberId").value(feedReply.getMember().getMemberId()))
-                .andExpect(jsonPath("$.content").value(feedReply.getContent()));
+        actions.andExpect(status().isCreated())
+                .andExpect(jsonPath("$.data.feedReplyId").value(feedReply.getFeedReplyId()))
+                .andExpect(jsonPath("$.data.feedId").value(feedReply.getFeed().getFeedId()))
+                .andExpect(jsonPath("$.data.memberId").value(feedReply.getMember().getMemberId()))
+                .andExpect(jsonPath("$.data.content").value(feedReply.getContent()));
 
     }
 
@@ -180,10 +180,10 @@ public class FeedReplyControllerTest {
                 );
 
         actions.andExpect(status().isOk())
-                .andExpect(jsonPath("$.feedReplyId").value(feedReply.getFeedReplyId()))
-                .andExpect(jsonPath("$.feedId").value(feedReply.getFeed().getFeedId()))
-                .andExpect(jsonPath("$.memberId").value(feedReply.getMember().getMemberId()))
-                .andExpect(jsonPath("$.content").value(feedReply.getContent()));
+                .andExpect(jsonPath("$.data.feedReplyId").value(feedReply.getFeedReplyId()))
+                .andExpect(jsonPath("$.data.feedId").value(feedReply.getFeed().getFeedId()))
+                .andExpect(jsonPath("$.data.memberId").value(feedReply.getMember().getMemberId()))
+                .andExpect(jsonPath("$.data.content").value(feedReply.getContent()));
 
     }
 
@@ -199,7 +199,7 @@ public class FeedReplyControllerTest {
         );
 
         ResultActions result =
-                actions.andExpect(status().isOk());
+                actions.andExpect(status().isNoContent());
     }
 
 }

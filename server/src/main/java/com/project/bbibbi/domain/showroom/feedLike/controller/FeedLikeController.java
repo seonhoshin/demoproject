@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class FeedLikeController {
 
-    private final static String FEED_Like_DEFAULT_URL = "/feedlike";
+    private final static String FEED_Like_DEFAULT_URL = "/feed/{feed-id}/feedlike";
 
     private final FeedLikeService feedLikeService;
 

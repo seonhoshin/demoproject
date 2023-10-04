@@ -7,11 +7,16 @@ import com.project.bbibbi.domain.showroom.feedReply.dto.FeedReplyResponseDto;
 import com.project.bbibbi.domain.showroom.feedReply.entity.FeedReply;
 import com.project.bbibbi.domain.showroom.feedReply.mapper.FeedReplyMapper;
 import com.project.bbibbi.domain.showroom.feedReply.service.FeedReplyService;
+import com.project.bbibbi.global.response.MultiResponseDto;
+import com.project.bbibbi.global.response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +26,8 @@ import java.util.stream.Collectors;
 public class FeedReplyController {
     private final FeedReplyService feedReplyService;
     private final FeedReplyMapper feedReplyMapper;
+
+    private final static String FEED_REPLY_DEFAULT_URL = "/feed/{feed-id}/feedReply";
 
 
     @PostMapping
@@ -37,18 +44,23 @@ public class FeedReplyController {
 
     FeedReplyResponseDto feedReplyResponseDto = feedReplyMapper.feedReplyToFeedReplyResponseDto(savedReply);
 
-    return ResponseEntity.ok(feedReplyResponseDto);
+    URI location = UriComponentsBuilder.newInstance().path(FEED_REPLY_DEFAULT_URL+"/{feed-reply-id}")
+            .buildAndExpand(feedId,savedReply.getFeedReplyId()).toUri();
+
+    return ResponseEntity.created(location).body(new SingleResponseDto<>(feedReplyResponseDto));
 
     }
 
-    @GetMapping("/{replyId}")
-    public ResponseEntity<FeedReplyResponseDto> findReply(@PathVariable Long replyId) {
+    @GetMapping("/{reply-id}")
+    public ResponseEntity findReply(@PathVariable("reply-id") Long replyId) {
+
         FeedReplyResponseDto replyResponseDto = feedReplyService.findReply(replyId);
-        return ResponseEntity.ok(replyResponseDto);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(replyResponseDto), HttpStatus.OK);
     }
 
     @PatchMapping("/{reply-id}")
-    public ResponseEntity<FeedReplyResponseDto> updateFeedReply(
+    public ResponseEntity updateFeedReply(
             @PathVariable("reply-id") Long replyId,
             @RequestBody FeedReplyRequestDto dto) {
 
@@ -56,18 +68,19 @@ public class FeedReplyController {
 
         FeedReplyResponseDto feedReplyResponseDto = feedReplyMapper.feedReplyToFeedReplyResponseDto(upatedReply);
 
-        return ResponseEntity.ok(feedReplyResponseDto);
+        return new ResponseEntity(new SingleResponseDto<>(feedReplyResponseDto), HttpStatus.OK);
     }
-    @DeleteMapping("/{replyId}")
-    public ResponseEntity<String> deleteFeedReply(@PathVariable Long replyId) {
+
+    @DeleteMapping("/{reply-id}")
+    public ResponseEntity deleteFeedReply(@PathVariable("reply-id") Long replyId) {
 
         feedReplyService.deleteReply(replyId);
 
-        return ResponseEntity.ok("댓글이 성공적으로 삭제되었습니다.");
+        return new ResponseEntity<>("댓글이 성공적으로 삭제되었습니다.", HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/replies")
-    public ResponseEntity<List<FeedReplyResponseDto>> getAllReplyForFeed(
+    public ResponseEntity getAllReplyForFeed(
             @PathVariable("feed-id") Long feedId,
             @RequestParam int page) {
 
@@ -80,7 +93,7 @@ public class FeedReplyController {
                 .map(feedReplyMapper::feedReplyToFeedReplyResponseDto)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(replyDtoList);
+        return new ResponseEntity(new MultiResponseDto<>(replyDtoList), HttpStatus.OK);
     }
 
 }
