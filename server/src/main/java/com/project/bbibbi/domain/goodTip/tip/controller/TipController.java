@@ -15,6 +15,7 @@ import com.project.bbibbi.domain.goodTip.tip.service.TipService;
 import com.project.bbibbi.global.exception.tipexception.TipNotFoundException;
 import com.project.bbibbi.global.response.MultiResponseDto;
 import com.project.bbibbi.global.response.PageAbleResponseDto;
+import com.project.bbibbi.global.response.SingleResponseDto;
 import org.springframework.data.domain.Page;
 //import org.springframework.data.domain.Pageable;
 //import org.springframework.data.domain.Slice;
@@ -23,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -47,36 +49,45 @@ public class TipController {
     }
 
     @PostMapping
-    public ResponseEntity<TipResponseDto> createTip(@RequestBody @Valid TipPostDto tipPostDto) {
+    public ResponseEntity createTip(@RequestBody @Valid TipPostDto tipPostDto) {
 
         Tip tip = tipMapper.tipPostDtoToTip(tipPostDto);
+
         Tip createdTip = tipService.createTip(tip);
+
         TipResponseDto tipResponseDto = tipMapper.tipToTipResponseDto(createdTip);
-        return ResponseEntity.created(URI.create("/tip/" + createdTip.getTipId())).body(tipResponseDto);
+
+        return ResponseEntity.created(URI.create("/tip/" + createdTip.getTipId())).body(new SingleResponseDto<>(tipResponseDto));
     }
 
     @PatchMapping("/{tip-id}")
-    public ResponseEntity<TipResponseDto> updateTip(
+    public ResponseEntity updateTip(
             @PathVariable("tip-id") Long tipId, @RequestBody @Valid TipPatchDto tipPatchDto) {
 
         tipPatchDto.setTipId(tipId);
 
         Tip tip = tipMapper.tipPatchDtoToTip(tipPatchDto);
         Tip updatedTip = tipService.updateTip(tipId, tip);
+
         if (updatedTip == null) {
             throw new TipNotFoundException();
         }
+
         TipResponseDto tipResponseDto = tipMapper.tipToTipResponseDto(updatedTip);
-        return ResponseEntity.ok(tipResponseDto);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(tipResponseDto), HttpStatus.OK);
     }
     @GetMapping("/{tip-id}")
-    public ResponseEntity<TipResponseDto> getTip(@PathVariable("tip-id") Long tipId) {
+    public ResponseEntity getTip(@PathVariable("tip-id") Long tipId) {
         Tip tip = tipService.getTip(tipId);
+
         if (tip == null) {
             throw new TipNotFoundException();
         }
+
         TipResponseDto tipResponseDto = tipMapper.tipToTipResponseDto(tip);
-        return ResponseEntity.ok(tipResponseDto);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(tipResponseDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{tip-id}")
@@ -133,6 +144,7 @@ public class TipController {
         pageAbleResponseDto.setData(tipResponseDtos);
 
         return ResponseEntity.ok(pageAbleResponseDto);
+
     }
 
 
@@ -172,7 +184,7 @@ public class TipController {
                 .map(tipMapper::tipToTipResponseDto)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(tipResponseDtos);
+        return new ResponseEntity<>(new MultiResponseDto<>(tipResponseDtos), HttpStatus.OK);
     }
 
 }
