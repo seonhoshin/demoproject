@@ -7,7 +7,7 @@ import com.project.bbibbi.domain.showroom.feed.entity.Feed;
 //import com.project.bbibbi.domain.feed.repository.FeedImageRepository;
 //import com.project.bbibbi.domain.feed.repository.FeedImageTagRepository;
 import com.project.bbibbi.domain.showroom.feed.repository.FeedRepository;
-import com.project.bbibbi.domain.showroom.feedBookmark.repository.FeedBookMarkRepository;
+import com.project.bbibbi.domain.showroom.feedBookMark.repository.FeedBookMarkRepository;
 import com.project.bbibbi.domain.showroom.feedComment.repository.FeedCommentRepository;
 import com.project.bbibbi.domain.showroom.feedReply.entity.FeedReply;
 import com.project.bbibbi.domain.showroom.feedReplyLike.repository.FeedReplyLikeRepository;

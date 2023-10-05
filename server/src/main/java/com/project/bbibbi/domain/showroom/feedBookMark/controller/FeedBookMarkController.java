@@ -1,12 +1,12 @@
-package com.project.bbibbi.domain.showroom.feedBookmark.controller;
+package com.project.bbibbi.domain.showroom.feedBookMark.controller;
 
 
 import com.project.bbibbi.auth.utils.loginUtils;
-import com.project.bbibbi.domain.showroom.feedBookmark.dto.FeedBookMarkRequestDto;
-import com.project.bbibbi.domain.showroom.feedBookmark.dto.FeedBookMarkResponseDto;
-import com.project.bbibbi.domain.showroom.feedBookmark.entity.FeedBookMark;
-import com.project.bbibbi.domain.showroom.feedBookmark.mapper.FeedBookMarkMapper;
-import com.project.bbibbi.domain.showroom.feedBookmark.service.FeedBookMarkService;
+import com.project.bbibbi.domain.showroom.feedBookMark.dto.FeedBookMarkRequestDto;
+import com.project.bbibbi.domain.showroom.feedBookMark.dto.FeedBookMarkResponseDto;
+import com.project.bbibbi.domain.showroom.feedBookMark.entity.FeedBookMark;
+import com.project.bbibbi.domain.showroom.feedBookMark.mapper.FeedBookMarkMapper;
+import com.project.bbibbi.domain.showroom.feedBookMark.service.FeedBookMarkService;
 import com.project.bbibbi.global.response.SingleResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class FeedBookMarkController {
 
-    private final static String FEED_bookMark_DEFAULT_URL = "/feedBookMark";
+    private final static String FEED_bookMark_DEFAULT_URL = "/feed/{feed-id}/feedBookMark";
 
     private final FeedBookMarkService feedBookMarkService;
 

@@ -1,4 +1,4 @@
-package com.project.bbibbi.domain.showroom.feedBookmark.entity;
+package com.project.bbibbi.domain.showroom.feedBookMark.entity;
 
 import com.project.bbibbi.domain.showroom.feed.entity.Feed;
 import com.project.bbibbi.domain.member.entity.Member;

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class FeedReplyLikeController {
 
-    private final static String FEED_REPLY_LIKE_DEFAULT_URL = "/feedReplyLike";
+    private final static String FEED_REPLY_LIKE_DEFAULT_URL = "/feed/feedReply/{feed-reply-id}/feedReplyLike";
 
     private final FeedReplyLikeService feedReplyLikeService;
 

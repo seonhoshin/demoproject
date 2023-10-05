@@ -1,7 +1,7 @@
-package com.project.bbibbi.domain.showroom.feedBookmark.service;
+package com.project.bbibbi.domain.showroom.feedBookMark.service;
 
-import com.project.bbibbi.domain.showroom.feedBookmark.entity.FeedBookMark;
-import com.project.bbibbi.domain.showroom.feedBookmark.repository.FeedBookMarkRepository;
+import com.project.bbibbi.domain.showroom.feedBookMark.entity.FeedBookMark;
+import com.project.bbibbi.domain.showroom.feedBookMark.repository.FeedBookMarkRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

@@ -1,6 +1,6 @@
-package com.project.bbibbi.domain.showroom.feedBookmark.repository;
+package com.project.bbibbi.domain.showroom.feedBookMark.repository;
 
-import com.project.bbibbi.domain.showroom.feedBookmark.entity.FeedBookMark;
+import com.project.bbibbi.domain.showroom.feedBookMark.entity.FeedBookMark;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

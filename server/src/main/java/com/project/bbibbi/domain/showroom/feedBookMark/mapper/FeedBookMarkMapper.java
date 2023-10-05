@@ -1,9 +1,9 @@
-package com.project.bbibbi.domain.showroom.feedBookmark.mapper;
+package com.project.bbibbi.domain.showroom.feedBookMark.mapper;
 
 import com.project.bbibbi.domain.showroom.feed.entity.Feed;
-import com.project.bbibbi.domain.showroom.feedBookmark.dto.FeedBookMarkRequestDto;
-import com.project.bbibbi.domain.showroom.feedBookmark.dto.FeedBookMarkResponseDto;
-import com.project.bbibbi.domain.showroom.feedBookmark.entity.FeedBookMark;
+import com.project.bbibbi.domain.showroom.feedBookMark.dto.FeedBookMarkRequestDto;
+import com.project.bbibbi.domain.showroom.feedBookMark.dto.FeedBookMarkResponseDto;
+import com.project.bbibbi.domain.showroom.feedBookMark.entity.FeedBookMark;
 import com.project.bbibbi.domain.member.entity.Member;
 import org.mapstruct.Mapper;
 

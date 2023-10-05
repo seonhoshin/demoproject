@@ -1,7 +1,7 @@
 package com.project.bbibbi.domain.member.entity;
 
 import com.project.bbibbi.domain.showroom.feedComment.entity.FeedComment;
-import com.project.bbibbi.domain.showroom.feedBookmark.entity.FeedBookMark;
+import com.project.bbibbi.domain.showroom.feedBookMark.entity.FeedBookMark;
 import com.project.bbibbi.domain.showroom.feed.entity.Feed;
 import com.project.bbibbi.domain.showroom.feedReply.entity.FeedReply;
 import com.project.bbibbi.domain.showroom.feedReplyLike.entity.FeedReplyLike;
