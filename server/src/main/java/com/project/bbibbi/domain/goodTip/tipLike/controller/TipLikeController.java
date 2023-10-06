@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/tip/{tip-id}/tiplike")
+@RequestMapping("/tip/{tip-id}/tipLike")
 @Validated
 public class TipLikeController {
 

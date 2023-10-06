@@ -13,11 +13,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/tip/{tip-id}/tipreply/{reply-id}/tipreplylike")
+@RequestMapping("/tip/tipReply/{tip-reply-id}/tipReplyLike")
 @Validated
 public class TipReplyLikeController {
 
-    private final static String TIP_REPLY_LIKE_DEFAULT_URL = "/tipreplylike";
+    private final static String TIP_REPLY_LIKE_DEFAULT_URL = "/tip/tipReply/{tip-reply-id}/tipReplyLike";
 
     private final TipReplyLikeService tipReplyLikeService;
 
@@ -30,7 +30,7 @@ public class TipReplyLikeController {
 
     @PatchMapping
     public ResponseEntity patchTipReplyLike(
-            @PathVariable("reply-id") Long replyId) {
+            @PathVariable("tip-reply-id") Long replyId) {
 
         Long memberId = loginUtils.getLoginId();
 

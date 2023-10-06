@@ -6,20 +6,25 @@ import com.project.bbibbi.domain.goodTip.tipReply.dto.TipReplyResponseDto;
 import com.project.bbibbi.domain.goodTip.tipReply.entity.TipReply;
 import com.project.bbibbi.domain.goodTip.tipReply.mapper.TipReplyMapper;
 import com.project.bbibbi.domain.goodTip.tipReply.service.TipReplyService;
+import com.project.bbibbi.global.response.MultiResponseDto;
+import com.project.bbibbi.global.response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/tip/{tip-id}/tipreply")
+@RequestMapping("/tip/{tip-id}/tipReply")
 @RequiredArgsConstructor
 public class TipReplyController {
 
-    private final static String TIP_REPLY_DEFAULT_URL = "/tipReply";
+    private final static String TIP_REPLY_DEFAULT_URL = "/tip/{tip-id}/tipReply";
 
     private final TipReplyService tipReplyService;
     private final TipReplyMapper tipReplyMapper;
@@ -38,18 +43,23 @@ public class TipReplyController {
 
         TipReplyResponseDto tipReplyResponseDto = tipReplyMapper.tipReplyToTipReplyResponseDto(savedReply);
 
-        return ResponseEntity.ok(tipReplyResponseDto);
+        URI location = UriComponentsBuilder.newInstance().path(TIP_REPLY_DEFAULT_URL+"/{tip-reply-id}")
+                .buildAndExpand(tipId, savedReply.getTipReplyId()).toUri();
+
+        return ResponseEntity.created(location).body(new SingleResponseDto<>(tipReplyResponseDto));
     }
 
     @GetMapping("/{reply-id}")
-    public ResponseEntity<TipReplyResponseDto> findReply(
+    public ResponseEntity findReply(
             @PathVariable("reply-id") Long replyId) {
+
         TipReplyResponseDto replyResponseDto = tipReplyService.findReply(replyId);
-        return ResponseEntity.ok(replyResponseDto);
+
+        return new ResponseEntity(new SingleResponseDto<>(replyResponseDto), HttpStatus.OK);
     }
 
     @PatchMapping("/{reply-id}")
-    public ResponseEntity<TipReplyResponseDto> updateTipReply(
+    public ResponseEntity updateTipReply(
             @PathVariable("reply-id") Long replyId,
             @RequestBody TipReplyRequestDto dto) {
 
@@ -57,7 +67,7 @@ public class TipReplyController {
 
             TipReplyResponseDto tipReplyResponseDto = tipReplyMapper.tipReplyToTipReplyResponseDto(updatedReply);
 
-            return ResponseEntity.ok(tipReplyResponseDto);
+            return new ResponseEntity<>(new SingleResponseDto<>(tipReplyResponseDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{reply-id}")
@@ -65,7 +75,7 @@ public class TipReplyController {
             @PathVariable("reply-id") Long replyId) {
         tipReplyService.deleteReply(replyId);
 
-        return ResponseEntity.ok("댓글이 성공적으로 삭제되었습니다.");
+        return new ResponseEntity<>("댓글이 성공적으로 삭제되었습니다.", HttpStatus.NO_CONTENT);
     }
 
 
@@ -83,7 +93,7 @@ public class TipReplyController {
                 .map(tipReplyMapper::tipReplyToTipReplyResponseDto)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(replyDtoList);
+        return new ResponseEntity(new MultiResponseDto<>(replyDtoList), HttpStatus.OK);
     }
 
 }

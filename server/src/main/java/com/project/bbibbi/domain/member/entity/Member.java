@@ -8,7 +8,7 @@ import com.project.bbibbi.domain.showroom.feedReplyLike.entity.FeedReplyLike;
 import com.project.bbibbi.domain.showroom.feedLike.entity.FeedLike;
 import com.project.bbibbi.domain.follow.entity.Follow;
 import com.project.bbibbi.domain.goodTip.tip.entity.Tip;
-import com.project.bbibbi.domain.goodTip.tipBookmark.entity.TipBookmark;
+import com.project.bbibbi.domain.goodTip.tipBookMark.entity.TipBookMark;
 import com.project.bbibbi.domain.goodTip.tipComment.entity.TipComment;
 import com.project.bbibbi.domain.goodTip.tipLike.entity.TipLike;
 import com.project.bbibbi.domain.goodTip.tipReply.entity.TipReply;
@@ -73,7 +73,7 @@ public class Member extends BaseEntity {
     private List<TipComment> tipComments = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<TipBookmark> tipBookmarks = new ArrayList<>();
+    private List<TipBookMark> tipBookmarks = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<TipLike> tipLikes = new ArrayList<>();

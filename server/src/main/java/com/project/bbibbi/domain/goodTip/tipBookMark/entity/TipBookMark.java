@@ -1,4 +1,4 @@
-package com.project.bbibbi.domain.goodTip.tipBookmark.entity;
+package com.project.bbibbi.domain.goodTip.tipBookMark.entity;
 
 import com.project.bbibbi.domain.member.entity.Member;
 import com.project.bbibbi.domain.goodTip.tip.entity.Tip;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TipBookmark extends BaseEntity {
+public class TipBookMark extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tipBookmarkId;

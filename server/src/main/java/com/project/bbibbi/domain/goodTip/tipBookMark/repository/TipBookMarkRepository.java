@@ -1,12 +1,12 @@
-package com.project.bbibbi.domain.goodTip.tipBookmark.repository;
+package com.project.bbibbi.domain.goodTip.tipBookMark.repository;
 
-import com.project.bbibbi.domain.goodTip.tipBookmark.entity.TipBookmark;
+import com.project.bbibbi.domain.goodTip.tipBookMark.entity.TipBookMark;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface TipBookmarkRepository extends JpaRepository<TipBookmark, Long> {
+public interface TipBookMarkRepository extends JpaRepository<TipBookMark, Long> {
 
     @Modifying
     @Query(value = "delete from tip_bookmark where tip_id = :tipId and member_id = :memberId ", nativeQuery = true)

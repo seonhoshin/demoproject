@@ -6,17 +6,21 @@ import com.project.bbibbi.domain.goodTip.tipComment.entity.TipComment;
 import com.project.bbibbi.domain.goodTip.tipComment.mapper.TipCommentMapper;
 import com.project.bbibbi.domain.goodTip.tipComment.service.TipCommentService;
 import com.project.bbibbi.global.exception.tipexception.TipCommentNotFoundException;
+import com.project.bbibbi.global.response.SingleResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/tip/{tip-id}/tipReply/{reply-id}/tipComment")
+@RequestMapping("/tip/{tip-id}/tipReply/{tip-reply-id}/tipComment")
 public class TipCommentController {
 
-    private static final String TIP_COMMENT_DEFAULT_URL = "/tipComment";
+    private static final String TIP_COMMENT_DEFAULT_URL = "/tip/{tip-id}/tipReply/{tip-reply-id}/tipComment";
 
     private final TipCommentService tipCommentService;
     private final TipCommentMapper tipCommentMapper;
@@ -29,9 +33,9 @@ public class TipCommentController {
     }
 
     @PostMapping
-    public ResponseEntity<TipCommentDto> createComment(
+    public ResponseEntity createComment(
             @PathVariable("tip-id") Long tipId,
-            @PathVariable("reply-id") Long tipReplyId,
+            @PathVariable("tip-reply-id") Long tipReplyId,
             @RequestBody TipCommentDto dto) {
 
         dto.setTipId(tipId);
@@ -44,23 +48,31 @@ public class TipCommentController {
 
         TipCommentDto responseDto = tipCommentMapper.tipCommentToTipCommentDto(savedComment);
 
-        return ResponseEntity.ok(responseDto);
+        URI location = UriComponentsBuilder.newInstance().path(
+        TIP_COMMENT_DEFAULT_URL+"/{tip-comment-id}").buildAndExpand(tipId, tipReplyId, savedComment.getTipCommentId()).toUri();
+
+        return ResponseEntity.created(location).body(new SingleResponseDto<>(responseDto));
     }
 
 
     @GetMapping("/{comment-id}")
-    public ResponseEntity<TipCommentDto> findComment(@PathVariable("comment-id") Long commentId) {
+    public ResponseEntity findComment(@PathVariable("comment-id") Long commentId) {
         Optional<TipComment> optionalTipComment = tipCommentService.findById(commentId);
         if (optionalTipComment.isPresent()) {
+
             TipComment tipComment = optionalTipComment.get();
-            return ResponseEntity.ok(tipCommentMapper.tipCommentToTipCommentDto(tipComment));
+
+            return new ResponseEntity(new SingleResponseDto<>(tipCommentMapper.tipCommentToTipCommentDto(tipComment)), HttpStatus.OK);
+
         } else {
+
             throw new TipCommentNotFoundException();
+
         }
     }
 
     @PatchMapping("/{comment-id}")
-    public ResponseEntity<TipCommentDto> updateComment(
+    public ResponseEntity updateComment(
             @PathVariable("comment-id") Long commentId,
             @RequestBody TipCommentDto dto) {
 
@@ -68,13 +80,16 @@ public class TipCommentController {
 
             TipCommentDto tipCommentDto = tipCommentMapper.tipCommentToTipCommentDto(updateTipComment);
 
-            return ResponseEntity.ok(tipCommentDto);
+            return new ResponseEntity<>(new SingleResponseDto<>(tipCommentDto), HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{comment-id}")
     public ResponseEntity<String> deleteComment(@PathVariable("comment-id") Long commentId) {
+
         tipCommentService.deleteComment(commentId);
-        return ResponseEntity.ok("답글이 성공적으로 삭제되었습니다.");
+
+        return new ResponseEntity<>("댓글이 성공적으로 삭제되었습니다.", HttpStatus.NO_CONTENT);
     }
 
 }

@@ -1,21 +1,21 @@
-package com.project.bbibbi.domain.goodTip.tipBookmark.service;
+package com.project.bbibbi.domain.goodTip.tipBookMark.service;
 
-import com.project.bbibbi.domain.goodTip.tipBookmark.entity.TipBookmark;
-import com.project.bbibbi.domain.goodTip.tipBookmark.repository.TipBookmarkRepository;
+import com.project.bbibbi.domain.goodTip.tipBookMark.entity.TipBookMark;
+import com.project.bbibbi.domain.goodTip.tipBookMark.repository.TipBookMarkRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Service
-public class TipBookmarkService {
+public class TipBookMarkService {
 
-    private final TipBookmarkRepository tipBookmarkRepository;
+    private final TipBookMarkRepository tipBookmarkRepository;
 
-    public TipBookmarkService(TipBookmarkRepository tipBookmarkRepository) {
+    public TipBookMarkService(TipBookMarkRepository tipBookmarkRepository) {
         this.tipBookmarkRepository = tipBookmarkRepository;
     }
 
-    public TipBookmark settingTipBookmark(TipBookmark tipBookmark) {
+    public TipBookMark settingTipBookmark(TipBookMark tipBookmark) {
 
         Integer existCount = tipBookmarkRepository.existCount(tipBookmark.getTip().getTipId(), tipBookmark.getMember().getMemberId());
 
@@ -28,7 +28,7 @@ public class TipBookmarkService {
 
         Integer updatedBookmarkCount = tipBookmarkRepository.existCount(tipBookmark.getTip().getTipId(), tipBookmark.getMember().getMemberId());
 
-        TipBookmark updatedTipBookmark = new TipBookmark();
+        TipBookMark updatedTipBookmark = new TipBookMark();
         updatedTipBookmark.setTip(tipBookmark.getTip());
         updatedTipBookmark.setMember(tipBookmark.getMember());
 

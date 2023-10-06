@@ -1,22 +1,22 @@
-package com.project.bbibbi.domain.goodTip.tipBookmark.mapper;
+package com.project.bbibbi.domain.goodTip.tipBookMark.mapper;
 
-import com.project.bbibbi.domain.goodTip.tipBookmark.dto.TipBookmarkRequestDto;
-import com.project.bbibbi.domain.goodTip.tipBookmark.entity.TipBookmark;
+import com.project.bbibbi.domain.goodTip.tipBookMark.dto.TipBookMarkRequestDto;
+import com.project.bbibbi.domain.goodTip.tipBookMark.entity.TipBookMark;
 import com.project.bbibbi.domain.member.entity.Member;
 import com.project.bbibbi.domain.goodTip.tip.entity.Tip;
-import com.project.bbibbi.domain.goodTip.tipBookmark.dto.TipBookmarkResponseDto;
+import com.project.bbibbi.domain.goodTip.tipBookMark.dto.TipBookMarkResponseDto;
 import org.mapstruct.Mapper;
 
 import java.time.LocalDateTime;
 
 @Mapper(componentModel = "spring")
-public interface TipBookmarkMapper {
-    default TipBookmark tipBookmarkRequestDtoToTipBookmark(TipBookmarkRequestDto tipBookmarkRequestDto) {
+public interface TipBookMarkMapper {
+    default TipBookMark tipBookmarkRequestDtoToTipBookmark(TipBookMarkRequestDto tipBookmarkRequestDto) {
         if (tipBookmarkRequestDto == null) {
             return null;
         }
 
-        TipBookmark tipBookmark = new TipBookmark();
+        TipBookMark tipBookmark = new TipBookMark();
 
         Tip tip = new Tip();
         tip.setTipId(tipBookmarkRequestDto.getTipId());
@@ -27,12 +27,12 @@ public interface TipBookmarkMapper {
         return tipBookmark;
     }
 
-    default TipBookmarkResponseDto tipBookmarkToTipBookmarkResponseDto(TipBookmark tipBookmark) {
+    default TipBookMarkResponseDto tipBookmarkToTipBookmarkResponseDto(TipBookMark tipBookmark) {
         if (tipBookmark == null) {
             return null;
         }
 
-        TipBookmarkResponseDto tipBookmarkResponseDto = new TipBookmarkResponseDto();
+        TipBookMarkResponseDto tipBookmarkResponseDto = new TipBookMarkResponseDto();
 
         tipBookmarkResponseDto.setMemberId(tipBookmark.getMember().getMemberId());
         tipBookmarkResponseDto.setTipId(tipBookmark.getTip().getTipId());

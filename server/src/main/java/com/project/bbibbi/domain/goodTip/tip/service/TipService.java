@@ -8,7 +8,7 @@ import com.project.bbibbi.domain.goodTip.tipReply.entity.TipReply;
 import com.project.bbibbi.domain.follow.repository.FollowRepository;
 import com.project.bbibbi.domain.member.repository.MemberRepository;
 import com.project.bbibbi.domain.member.entity.Member;
-import com.project.bbibbi.domain.goodTip.tipBookmark.repository.TipBookmarkRepository;
+import com.project.bbibbi.domain.goodTip.tipBookMark.repository.TipBookMarkRepository;
 //import com.project.bbibbi.domain.tipImage.entity.TipImage;
 //import com.project.bbibbi.domain.tipImage.service.TipImageService;
 import com.project.bbibbi.domain.goodTip.tipLike.repository.TipLikeRepository;
@@ -32,7 +32,7 @@ public class TipService {
 
     private final TipLikeRepository tipLikeRepository;
 
-    private final TipBookmarkRepository tipBookmarkRepository;
+    private final TipBookMarkRepository tipBookmarkRepository;
     private final TipReplyLikeRepository tipReplyLikeRepository;
     private final FollowRepository followRepository;
 
@@ -43,7 +43,7 @@ public class TipService {
 
     public TipService(TipRepository tipRepository,
                       TipLikeRepository tipLikeRepository,
-                      TipBookmarkRepository tipBookmarkRepository,
+                      TipBookMarkRepository tipBookmarkRepository,
                       FollowRepository followRepository,
                       TipReplyLikeRepository tipReplyLikeRepository,
                       TipCommentRepository tipCommentRepository,
