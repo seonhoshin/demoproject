@@ -374,12 +374,13 @@ seb45_main_027
 │  │     ├─ WriteShowRoom.jsx
 │  │     └─ WriteTips.jsx
 │  └─ tailwind.config.js
-└─ server
+└─server
     │  .gitignore
     │  build.gradle
     │  gradlew
     │  gradlew.bat
     │  settings.gradle
+    │
     │
     ├─gradle
     │  └─wrapper
@@ -448,23 +449,6 @@ seb45_main_027
         │  │              │  │  └─service
         │  │              │  │          CustomOAuthUserService.java
         │  │              │  │
-        │  │              │  ├─oauth2
-        │  │              │  │  ├─domain
-        │  │              │  │  │  │  AuthCodeRequestUrlProvider.java
-        │  │              │  │  │  │  OauthServerType.java
-        │  │              │  │  │  │
-        │  │              │  │  │  └─authcode
-        │  │              │  │  │          AuthCodeRequestUrlProviderComposite.java
-        │  │              │  │  │
-        │  │              │  │  ├─infra
-        │  │              │  │  │      KakaoAuthCodeRequestUrlProvider.java
-        │  │              │  │  │
-        │  │              │  │  ├─presentation
-        │  │              │  │  │      OauthServerTypeConverter.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          OauthService.java
-        │  │              │  │
         │  │              │  └─utils
         │  │              │          ErrorResponder.java
         │  │              │          loginUtils.java
@@ -472,132 +456,6 @@ seb45_main_027
         │  │              │          PasswordUtil.java
         │  │              │
         │  │              ├─domain
-        │  │              │  ├─feed
-        │  │              │  │  ├─controller
-        │  │              │  │  │      FeedController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      FeedImageDto.java
-        │  │              │  │  │      FeedImageTagDto.java
-        │  │              │  │  │      FeedPatchDto.java
-        │  │              │  │  │      FeedPostDto.java
-        │  │              │  │  │      FeedResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      Feed.java
-        │  │              │  │  │      FeedImage.java
-        │  │              │  │  │      FeedImageTag.java
-        │  │              │  │  │
-        │  │              │  │  ├─mapper
-        │  │              │  │  │      FeedMapper.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      FeedImageRepository.java
-        │  │              │  │  │      FeedImageTagRepository.java
-        │  │              │  │  │      FeedRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          FeedService.java
-        │  │              │  │
-        │  │              │  ├─feedBookmark
-        │  │              │  │  ├─controller
-        │  │              │  │  │      FeedBookMarkController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      FeedBookMarkRequestDto.java
-        │  │              │  │  │      FeedBookMarkResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      FeedBookMark.java
-        │  │              │  │  │
-        │  │              │  │  ├─mapper
-        │  │              │  │  │      FeedBookMarkMapper.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      FeedBookMarkRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          FeedBookMarkService.java
-        │  │              │  │
-        │  │              │  ├─feedComment
-        │  │              │  │  ├─controller
-        │  │              │  │  │      FeedCommentController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      FeedCommentDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      FeedComment.java
-        │  │              │  │  │
-        │  │              │  │  ├─exception
-        │  │              │  │  │      FeedCommentNotFoundException.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      FeedCommentRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          FeedCommentService.java
-        │  │              │  │
-        │  │              │  ├─feedlike
-        │  │              │  │  ├─controller
-        │  │              │  │  │      FeedLikeController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      FeedLikeRequestDto.java
-        │  │              │  │  │      FeedLikeResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      FeedLike.java
-        │  │              │  │  │
-        │  │              │  │  ├─mapper
-        │  │              │  │  │      FeedLikeMapper.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      FeedLikeRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          FeedLikeService.java
-        │  │              │  │
-        │  │              │  ├─feedReply
-        │  │              │  │  ├─controller
-        │  │              │  │  │      FeedReplyController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      FeedReplyRequestDto.java
-        │  │              │  │  │      FeedReplyResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      FeedReply.java
-        │  │              │  │  │
-        │  │              │  │  ├─FeedReplyNotFoundException
-        │  │              │  │  │      FeedReplyNotFoundException.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      FeedReplyRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          FeedReplyService.java
-        │  │              │  │
-        │  │              │  ├─feedReplyLike
-        │  │              │  │  ├─controller
-        │  │              │  │  │      FeedReplyLikeController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      FeedReplyLikeRequestDto.java
-        │  │              │  │  │      FeedReplyLikeResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      FeedReplyLike.java
-        │  │              │  │  │
-        │  │              │  │  ├─mapper
-        │  │              │  │  │      FeedReplyLikeMapper.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      FeedReplyLikeRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          FeedReplyLikeService.java
-        │  │              │  │
         │  │              │  ├─follow
         │  │              │  │  ├─controller
         │  │              │  │  │      FollowController.java
@@ -619,6 +477,140 @@ seb45_main_027
         │  │              │  │  └─service
         │  │              │  │          FollowService.java
         │  │              │  │
+        │  │              │  ├─goodTip
+        │  │              │  │  ├─tip
+        │  │              │  │  │  ├─controller
+        │  │              │  │  │  │      TipController.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─dto
+        │  │              │  │  │  │      TipPatchDto.java
+        │  │              │  │  │  │      TipPostDto.java
+        │  │              │  │  │  │      TipResponseDto.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─entity
+        │  │              │  │  │  │      Tip.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─mapper
+        │  │              │  │  │  │      TipMapper.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─repository
+        │  │              │  │  │  │      TipRepository.java
+        │  │              │  │  │  │
+        │  │              │  │  │  └─service
+        │  │              │  │  │          TipService.java
+        │  │              │  │  │
+        │  │              │  │  ├─tipBookMark
+        │  │              │  │  │  ├─controller
+        │  │              │  │  │  │      TipBookMarkController.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─dto
+        │  │              │  │  │  │      TipBookMarkRequestDto.java
+        │  │              │  │  │  │      TipBookMarkResponseDto.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─entity
+        │  │              │  │  │  │      TipBookMark.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─mapper
+        │  │              │  │  │  │      TipBookMarkMapper.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─repository
+        │  │              │  │  │  │      TipBookMarkRepository.java
+        │  │              │  │  │  │
+        │  │              │  │  │  └─service
+        │  │              │  │  │          TipBookMarkService.java
+        │  │              │  │  │
+        │  │              │  │  ├─tipComment
+        │  │              │  │  │  ├─controller
+        │  │              │  │  │  │      TipCommentController.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─dto
+        │  │              │  │  │  │      TipCommentDto.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─entity
+        │  │              │  │  │  │      TipComment.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─mapper
+        │  │              │  │  │  │      TipCommentMapper.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─repository
+        │  │              │  │  │  │      TipCommentRepository.java
+        │  │              │  │  │  │
+        │  │              │  │  │  └─service
+        │  │              │  │  │          TipCommentService.java
+        │  │              │  │  │
+        │  │              │  │  ├─tipLike
+        │  │              │  │  │  ├─controller
+        │  │              │  │  │  │      TipLikeController.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─dto
+        │  │              │  │  │  │      TipLikeRequestDto.java
+        │  │              │  │  │  │      TipLikeResponseDto.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─entity
+        │  │              │  │  │  │      TipLike.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─mapper
+        │  │              │  │  │  │      TipLikeMapper.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─repository
+        │  │              │  │  │  │      TipLikeRepository.java
+        │  │              │  │  │  │
+        │  │              │  │  │  └─service
+        │  │              │  │  │          TipLikeService.java
+        │  │              │  │  │
+        │  │              │  │  ├─tipReply
+        │  │              │  │  │  ├─controller
+        │  │              │  │  │  │      TipReplyController.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─dto
+        │  │              │  │  │  │      TipReplyRequestDto.java
+        │  │              │  │  │  │      TipReplyResponseDto.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─entity
+        │  │              │  │  │  │      TipReply.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─mapper
+        │  │              │  │  │  │      TipReplyMapper.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─repository
+        │  │              │  │  │  │      TipReplyRepository.java
+        │  │              │  │  │  │
+        │  │              │  │  │  └─service
+        │  │              │  │  │          TipReplyService.java
+        │  │              │  │  │
+        │  │              │  │  ├─tipReplyLike
+        │  │              │  │  │  ├─controller
+        │  │              │  │  │  │      TipReplyLikeController.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─dto
+        │  │              │  │  │  │      TipReplyLikeRequestDto.java
+        │  │              │  │  │  │      TipReplyLikeResponseDto.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─entity
+        │  │              │  │  │  │      TipReplyLike.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─mapper
+        │  │              │  │  │  │      TipReplyLikeMapper.java
+        │  │              │  │  │  │
+        │  │              │  │  │  ├─repository
+        │  │              │  │  │  │      TipReplyLikeRepository.java
+        │  │              │  │  │  │
+        │  │              │  │  │  └─service
+        │  │              │  │  │          TipReplyLikeService.java
+        │  │              │  │  │
+        │  │              │  │  └─tipTag
+        │  │              │  │      ├─dto
+        │  │              │  │      │      TagDto.java
+        │  │              │  │      │
+        │  │              │  │      ├─entity
+        │  │              │  │      │      Tag.java
+        │  │              │  │      │
+        │  │              │  │      ├─repository
+        │  │              │  │      │      TagRepository.java
+        │  │              │  │      │
+        │  │              │  │      └─service
+        │  │              │  │              TagService.java
+        │  │              │  │
         │  │              │  ├─member
         │  │              │  │  ├─controller
         │  │              │  │  │  │  MemberController.java
@@ -632,7 +624,6 @@ seb45_main_027
         │  │              │  │  │
         │  │              │  │  ├─entity
         │  │              │  │  │      Member.java
-        │  │              │  │  │      MyInfo.java
         │  │              │  │  │
         │  │              │  │  ├─repository
         │  │              │  │  │      MemberRepository.java
@@ -659,150 +650,132 @@ seb45_main_027
         │  │              │  │          ShowRoomDto.java
         │  │              │  │          TipContentDto.java
         │  │              │  │
-        │  │              │  ├─tip
-        │  │              │  │  ├─controller
-        │  │              │  │  │      TipController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      TipPatchDto.java
-        │  │              │  │  │      TipPostDto.java
-        │  │              │  │  │      TipResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      Tip.java
-        │  │              │  │  │
-        │  │              │  │  ├─mapper
-        │  │              │  │  │      TipMapper.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      TipRepository.java
-        │  │              │  │  │      TipRepositoryCustom.java
-        │  │              │  │  │      TipRepositoryImpl.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          TipService.java
-        │  │              │  │
-        │  │              │  ├─tipBookmark
-        │  │              │  │  ├─controller
-        │  │              │  │  │      TipBookmarkController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      TipBookmarkRequestDto.java
-        │  │              │  │  │      TipBookmarkResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      TipBookmark.java
-        │  │              │  │  │
-        │  │              │  │  ├─mapper
-        │  │              │  │  │      TipBookmarkMapper.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      TipBookmarkRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          TipBookmarkService.java
-        │  │              │  │
-        │  │              │  ├─tipComment
-        │  │              │  │  ├─controller
-        │  │              │  │  │      TipCommentController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      TipCommentDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      TipComment.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      TipCommentRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          TipCommentService.java
-        │  │              │  │
-        │  │              │  ├─tipImage
-        │  │              │  │  ├─dto
-        │  │              │  │  │      TipImageDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      TipImage.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      TipImageRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          TipImageService.java
-        │  │              │  │
-        │  │              │  ├─tipLike
-        │  │              │  │  ├─controller
-        │  │              │  │  │      TipLikeController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      TipLikeRequestDto.java
-        │  │              │  │  │      TipLikeResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      TipLike.java
-        │  │              │  │  │
-        │  │              │  │  ├─mapper
-        │  │              │  │  │      TipLikeMapper.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      TipLikeRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          TipLikeService.java
-        │  │              │  │
-        │  │              │  ├─tipReply
-        │  │              │  │  ├─controller
-        │  │              │  │  │      TipReplyController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      TipReplyRequestDto.java
-        │  │              │  │  │      TipReplyResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      TipReply.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      TipReplyRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          TipReplyService.java
-        │  │              │  │
-        │  │              │  ├─tipReplyLike
-        │  │              │  │  ├─controller
-        │  │              │  │  │      TipReplyLikeController.java
-        │  │              │  │  │
-        │  │              │  │  ├─dto
-        │  │              │  │  │      TipReplyLikeRequestDto.java
-        │  │              │  │  │      TipReplyLikeResponseDto.java
-        │  │              │  │  │
-        │  │              │  │  ├─entity
-        │  │              │  │  │      TipReplyLike.java
-        │  │              │  │  │
-        │  │              │  │  ├─mapper
-        │  │              │  │  │      TipReplyLikeMapper.java
-        │  │              │  │  │
-        │  │              │  │  ├─repository
-        │  │              │  │  │      TipReplyLikeRepository.java
-        │  │              │  │  │
-        │  │              │  │  └─service
-        │  │              │  │          TipReplyLikeService.java
-        │  │              │  │
-        │  │              │  └─tipTag
-        │  │              │      ├─dto
-        │  │              │      │      TagDto.java
+        │  │              │  └─showroom
+        │  │              │      ├─feed
+        │  │              │      │  ├─controller
+        │  │              │      │  │      FeedController.java
+        │  │              │      │  │
+        │  │              │      │  ├─dto
+        │  │              │      │  │      FeedPatchDto.java
+        │  │              │      │  │      FeedPostDto.java
+        │  │              │      │  │      FeedResponseDto.java
+        │  │              │      │  │
+        │  │              │      │  ├─entity
+        │  │              │      │  │      Feed.java
+        │  │              │      │  │
+        │  │              │      │  ├─mapper
+        │  │              │      │  │      FeedMapper.java
+        │  │              │      │  │
+        │  │              │      │  ├─repository
+        │  │              │      │  │      FeedRepository.java
+        │  │              │      │  │
+        │  │              │      │  └─service
+        │  │              │      │          FeedService.java
         │  │              │      │
-        │  │              │      ├─entity
-        │  │              │      │      Tag.java
-        │  │              │      │      TipTag.java
+        │  │              │      ├─feedBookMark
+        │  │              │      │  ├─controller
+        │  │              │      │  │      FeedBookMarkController.java
+        │  │              │      │  │
+        │  │              │      │  ├─dto
+        │  │              │      │  │      FeedBookMarkRequestDto.java
+        │  │              │      │  │      FeedBookMarkResponseDto.java
+        │  │              │      │  │
+        │  │              │      │  ├─entity
+        │  │              │      │  │      FeedBookMark.java
+        │  │              │      │  │
+        │  │              │      │  ├─mapper
+        │  │              │      │  │      FeedBookMarkMapper.java
+        │  │              │      │  │
+        │  │              │      │  ├─repository
+        │  │              │      │  │      FeedBookMarkRepository.java
+        │  │              │      │  │
+        │  │              │      │  └─service
+        │  │              │      │          FeedBookMarkService.java
         │  │              │      │
-        │  │              │      ├─repository
-        │  │              │      │      TagRepository.java
-        │  │              │      │      TipTagRepository.java
+        │  │              │      ├─feedComment
+        │  │              │      │  ├─controller
+        │  │              │      │  │      FeedCommentController.java
+        │  │              │      │  │
+        │  │              │      │  ├─dto
+        │  │              │      │  │      FeedCommentDto.java
+        │  │              │      │  │
+        │  │              │      │  ├─entity
+        │  │              │      │  │      FeedComment.java
+        │  │              │      │  │
+        │  │              │      │  ├─exception
+        │  │              │      │  │      FeedCommentNotFoundException.java
+        │  │              │      │  │
+        │  │              │      │  ├─mapper
+        │  │              │      │  │      FeedCommentMapper.java
+        │  │              │      │  │
+        │  │              │      │  ├─repository
+        │  │              │      │  │      FeedCommentRepository.java
+        │  │              │      │  │
+        │  │              │      │  └─service
+        │  │              │      │          FeedCommentService.java
         │  │              │      │
-        │  │              │      └─service
-        │  │              │              TagService.java
-        │  │              │              TipTagService.java
+        │  │              │      ├─feedLike
+        │  │              │      │  ├─controller
+        │  │              │      │  │      FeedLikeController.java
+        │  │              │      │  │
+        │  │              │      │  ├─dto
+        │  │              │      │  │      FeedLikeRequestDto.java
+        │  │              │      │  │      FeedLikeResponseDto.java
+        │  │              │      │  │
+        │  │              │      │  ├─entity
+        │  │              │      │  │      FeedLike.java
+        │  │              │      │  │
+        │  │              │      │  ├─mapper
+        │  │              │      │  │      FeedLikeMapper.java
+        │  │              │      │  │
+        │  │              │      │  ├─repository
+        │  │              │      │  │      FeedLikeRepository.java
+        │  │              │      │  │
+        │  │              │      │  └─service
+        │  │              │      │          FeedLikeService.java
+        │  │              │      │
+        │  │              │      ├─feedReply
+        │  │              │      │  ├─controller
+        │  │              │      │  │      FeedReplyController.java
+        │  │              │      │  │
+        │  │              │      │  ├─dto
+        │  │              │      │  │      FeedReplyRequestDto.java
+        │  │              │      │  │      FeedReplyResponseDto.java
+        │  │              │      │  │
+        │  │              │      │  ├─entity
+        │  │              │      │  │      FeedReply.java
+        │  │              │      │  │
+        │  │              │      │  ├─FeedReplyNotFoundException
+        │  │              │      │  │      FeedReplyNotFoundException.java
+        │  │              │      │  │
+        │  │              │      │  ├─mapper
+        │  │              │      │  │      FeedReplyMapper.java
+        │  │              │      │  │
+        │  │              │      │  ├─repository
+        │  │              │      │  │      FeedReplyRepository.java
+        │  │              │      │  │
+        │  │              │      │  └─service
+        │  │              │      │          FeedReplyService.java
+        │  │              │      │
+        │  │              │      └─feedReplyLike
+        │  │              │          ├─controller
+        │  │              │          │      FeedReplyLikeController.java
+        │  │              │          │
+        │  │              │          ├─dto
+        │  │              │          │      FeedReplyLikeRequestDto.java
+        │  │              │          │      FeedReplyLikeResponseDto.java
+        │  │              │          │
+        │  │              │          ├─entity
+        │  │              │          │      FeedReplyLike.java
+        │  │              │          │
+        │  │              │          ├─mapper
+        │  │              │          │      FeedReplyLikeMapper.java
+        │  │              │          │
+        │  │              │          ├─repository
+        │  │              │          │      FeedReplyLikeRepository.java
+        │  │              │          │
+        │  │              │          └─service
+        │  │              │                  FeedReplyLikeService.java
         │  │              │
         │  │              └─global
         │  │                  │  ErrorResponse.java
@@ -867,11 +840,7 @@ seb45_main_027
         │  │                  │  └─service
         │  │                  │          MailService.java
         │  │                  │
-        │  │                  ├─querydsl
-        │  │                  │      QuerydslConfiguration.java
-        │  │                  │
         │  │                  ├─response
-        │  │                  │      ApiPageResponse.java
         │  │                  │      ApiSingleResponse.java
         │  │                  │      MultiResponseDto.java
         │  │                  │      PageAbleResponseDto.java
@@ -881,16 +850,64 @@ seb45_main_027
         │  │                          CustomBeanUtils.java
         │  │
         │  └─resources
-        │        application.yml
-        │        application_h2.yml
-        │        application_rds.yml
-        │        application_server.yml
+        │          application.yml
+        │          application_h2.yml
+        │          application_rds.yml
+        │          application_server.yml
         │
         └─test
             └─java
                 └─com
                     └─project
                         └─bbibbi
-                              BbibbiApplicationTests.java
+                            │  BbibbiApplicationTests.java
+                            │
+                            ├─auth
+                            │      AuthControllerTest.java
+                            │
+                            └─domain
+                                ├─follow
+                                │      FollowControllerTest.java
+                                │
+                                ├─goodTip
+                                │  ├─tip
+                                │  │      TipControllerTest.java
+                                │  │
+                                │  ├─tipBookMark
+                                │  │      TipBookMarkControllerTest.java
+                                │  │
+                                │  ├─tipComment
+                                │  │      TipCommentControllerTest.java
+                                │  │
+                                │  ├─tipLike
+                                │  │      TipLikeControllerTest.java
+                                │  │
+                                │  ├─tipReply
+                                │  │      TipReplyControllerTest.java
+                                │  │
+                                │  └─tipReplyLike
+                                │          TipReplyLikeControllerTest.java
+                                │
+                                ├─member
+                                │      MemberControllerTest.java
+                                │
+                                └─showroom
+                                    ├─feed
+                                    │      FeedControllerTest.java
+                                    │
+                                    ├─feedBookMark
+                                    │      FeedBookMarkControllerTest.java
+                                    │
+                                    ├─feedComment
+                                    │      FeedCommentControllerTest.java
+                                    │
+                                    ├─feedLike
+                                    │      FeedLikeControllerTest.java
+                                    │
+                                    ├─feedReply
+                                    │      FeedReplyControllerTest.java
+                                    │
+                                    └─feedReplyLike
+                                            FeedReplyLikeControllerTest.java
 	
 ```
